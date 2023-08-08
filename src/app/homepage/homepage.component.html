@@ -1,0 +1,32 @@
+<div class="container">
+
+  <div class="filtered__table">
+    <p>Filter by keyword</p>
+    <input matInput placeholder="" [(ngModel)]="keyword" (ngModelChange)="filterArticles()">
+  </div>
+
+  <div class="results__table">
+    <p>Results: {{ articles.length }}</p>
+  </div>
+
+  <div class="articles">
+    <div class="article__table" *ngFor="let article of articles">
+
+        <img *ngIf="article.imageUrl" [src]="article.imageUrl" alt="Article Image">
+
+        <div class="article__container">
+          <p>{{ article.publishedAt | date }}</p>
+
+          <div class="article__title">
+            <h2 [innerHTML]="highlightKeywords(article.title)"></h2>
+          </div>
+
+          <h3 [innerHTML]="highlightKeywords(article.summary)"></h3>
+
+          <a (click)="navigateToArticle(article.id)">Read more</a>
+        </div>
+
+    </div>
+  </div>
+
+</div>
